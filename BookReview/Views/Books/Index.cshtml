@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BookReview.ViewModels.BookViewModel> 
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<h2>Books</h2>
+
+@Html.ActionLink("Add Book", "Create")
+
+@foreach (var item in Model)
+{
+    <p><strong>@item.Title</strong> @item.RatingAvg <a href="@Url.Action("Details", new{id=@item.Id})">Reviews</a> (@item.Reviews.Count)</p>
+    <div id="book">
+        <div class="display-label">
+            Author
+        </div>
+        <div class="display-field">
+            @item.Author
+        </div>
+        <div class="display-label">
+            ISBN
+        </div>
+        <div class="display-field">
+            @item.Isbn
+        </div>
+    </div>
+}

@@ -1,0 +1,56 @@
+﻿@model BookReview.Models.Book
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<style>
+    
+</style>
+
+<h2>@Model.Title</h2>
+
+<p>
+    @Html.ActionLink("Review this book", "Create", "BookReviews", new{ id = Model.Id }, new{ id = "reviewLink2" })
+</p>
+
+<div class="display-label">
+    @Html.DisplayNameFor(model => model.Author)
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Author)
+</div>
+
+<div class="display-label">
+    @Html.DisplayNameFor(model => model.Isbn)
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Isbn)
+</div>
+
+<h3>Reviews</h3>
+
+@{
+    if (Model.Reviews != null)  
+    {
+        foreach (var item in Model.Reviews)
+        {
+            <div id="review">
+                <p>@item.Rating @item.Date @item.Reviewer</p>
+                <p>@item.Body</p>
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>
+            <span class="light-font">This book has not been reviewed. Be the first!</span> @Html.ActionLink("Review this book", "Create", "BookReviews", new { id = Model.Id }, new{id="reviewLink2"})
+        </p>
+    }
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
